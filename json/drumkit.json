@@ -1,0 +1,184 @@
+{
+  "tutorialTitle": "Rhythm/Groove Building Reference Guide",
+  "tempoBPM": 110,
+  "key": "A Minor",
+  "soundPalette": [
+    {"name": "Kick", "description": "Primary low-end pulse. Defines fundamental rhythm."},
+    {"name": "Kick2", "description": "Alternate kick sound for variation, layering, or ghost notes."},
+    {"name": "Sub Kick", "description": "Ultra-low frequency layer for emphasis or club weight."},
+    {"name": "Snare", "description": "Primary backbeat element, usually on 2 and 4."},
+    {"name": "Clap", "description": "Hand clap sound, can layer with snare."},
+    {"name": "Open Hat", "description": "Sustained hi-hat, creates space and release."},
+    {"name": "Closed Hat", "description": "Short hi-hat, primary timekeeping element."},
+    {"name": "Tom", "description": "Mid-range drum for fills, transitions, melodic percussion."},
+    {"name": "Wood", "description": "Woodblock or rimshot, bright cutting percussive element."}
+  ],
+  "grooves": [
+    {
+      "name": "Intro",
+      "bars": [
+        {
+          "barNumber": 1,
+          "description": "Minimal - Establishing pulse",
+          "notation": {
+            "Kick": "X - - - - - - - X - - - - - - -",
+            "Kick2": "- - - - - - - - - - - - - - - -",
+            "Sub Kick": "- - - - - - - - - - - - - - - -",
+            "Snare": "- - - - - - - - - - - - - - - -",
+            "Clap": "- - - - - - - - - - - - - - - -",
+            "Open Hat": "- - - - - - - - - - - - - - - -",
+            "Closed Hat": "X - - - X - - - X - - - X - - -",
+            "Tom": "- - - - - - - - - - - - - - - -",
+            "Wood": "- - - - - - - - - - - - - - - -"
+          }
+        },
+        {
+          "barNumber": 2,
+          "description": "Add backbeat",
+          "notation": {
+            "Kick": "X - - - - - - - X - - - - - - -",
+            "Kick2": "- - - - - - - - - - - - - - - -",
+            "Sub Kick": "- - - - - - - - - - - - - - - -",
+            "Snare": "- - - - X - - - - - - - X - - -",
+            "Clap": "- - - - - - - - - - - - - - - -",
+            "Open Hat": "- - - - - - - - - - - - - - - -",
+            "Closed Hat": "X - - - X - - - X - - - X - - -",
+            "Tom": "- - - - - - - - - - - - - - - -",
+            "Wood": "- - - - - - - - - - - - - - - -"
+          }
+        },
+        {
+          "barNumber": 3,
+          "description": "Increase subdivision",
+          "notation": {
+            "Kick": "X - - - - - - - X - - - - - - -",
+            "Kick2": "- - - - - - - - - - - - - - - -",
+            "Sub Kick": "- - - - - - - - - - - - - - - -",
+            "Snare": "- - - - X - - - - - - - X - - -",
+            "Clap": "- - - - - - - - - - - - - - - -",
+            "Open Hat": "- - - - - - - X - - - - - - - X",
+            "Closed Hat": "X - X - - - X - X - X - - - X -",
+            "Tom": "- - - - - - - - - - - - - - - -",
+            "Wood": "- - - - - - - - - - - - - - - -"
+          }
+        },
+        {
+          "barNumber": 4,
+          "description": "Full intro with fill",
+          "notation": {
+            "Kick": "X - - - - - - - X - - - - - - -",
+            "Kick2": "- - - - - - - - - - - - - - - -",
+            "Sub Kick": "X - - - - - - - X - - - - - - -",
+            "Snare": "- - - - X - - - - - - - X - x x",
+            "Clap": "- - - - X - - - - - - - X - - -",
+            "Open Hat": "- - - - - - - X - - - - - - - -",
+            "Closed Hat": "X - X - - - X - X - X - - - - -",
+            "Tom": "- - - - - - - - - - - - - X X -",
+            "Wood": "- - - - - - - - - - - - - - - -"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chorus",
+      "bars": [
+        {
+          "barNumber": 5,
+          "description": "Main chorus groove",
+          "notation": {
+            "Kick": "X - - - - - X - X - - - - - - -",
+            "Kick2": "- - - - - - - - - - - x - - - -",
+            "Sub Kick": "X - - - - - - - X - - - - - - -",
+            "Snare": "- - - - X - - - - - - - X - - -",
+            "Clap": "- - - - X - - - - - - - X - - -",
+            "Open Hat": "- - - - - - - X - - - - - - - X",
+            "Closed Hat": "X - X - - - X - X - X - - - X -",
+            "Tom": "- - - - - - - - - - - - - - - -",
+            "Wood": "- - - - - - - - - - - - - - - -"
+          }
+        }
+        // Bars 6-12 similar; could be expanded
+      ]
+    },
+    {
+      "name": "Verse",
+      "bars": [
+        {
+          "barNumber": 13,
+          "description": "Minimal verse foundation",
+          "notation": {
+            "Kick": "X - - - - - - - X - - - - - - -",
+            "Kick2": "- - - - - - - - - - - - - - - -",
+            "Sub Kick": "- - - - - - - - - - - - - - - -",
+            "Snare": "- - - - X - - - - - - - X - - -",
+            "Clap": "- - - - - - - - - - - - - - - -",
+            "Open Hat": "- - - - - - - X - - - - - - - -",
+            "Closed Hat": "X - X - X - X - X - X - X - X -",
+            "Tom": "- - - - - - - - - - - - - - - -",
+            "Wood": "- - - - - - - - - - - - - - - -"
+          }
+        }
+        // Bars 14-28 similar; could be expanded
+      ]
+    },
+    {
+      "name": "Outro",
+      "bars": [
+        {
+          "barNumber": 29,
+          "description": "Maintain energy, remove sub kick",
+          "notation": {
+            "Kick": "X - - - - - X - X - - - - - X -",
+            "Kick2": "- - - - - - - - - - - x - - - -",
+            "Sub Kick": "- - - - - - - - - - - - - - - -",
+            "Snare": "- - - - X - - - - - - - X - - -",
+            "Clap": "- - - - X - - - - - - - X - - -",
+            "Open Hat": "- - - - - - - X - - - - - - - X",
+            "Closed Hat": "X - X - - - X - X - X - - - X -",
+            "Tom": "- - - - - - - - - - - - - - - -",
+            "Wood": "- - - - - - - - - - - - - - - -"
+          }
+        }
+        // Bars 30-32 similar
+      ]
+    }
+  ],
+  "grooveAnalysis": {
+    "sections": [
+      {
+        "sectionName": "Intro",
+        "barRange": "1-4",
+        "description": "Progressive layering, starts minimal, adds snare, subdivision, fills."
+      },
+      {
+        "sectionName": "Chorus",
+        "barRange": "5-12",
+        "description": "Full arrangement, syncopated kick, open hats, wood block accents."
+      },
+      {
+        "sectionName": "Verse",
+        "barRange": "13-28",
+        "description": "Stripped back for vocal space, gradual reintroduction of elements, ghost notes."
+      },
+      {
+        "sectionName": "Outro",
+        "barRange": "29-32",
+        "description": "Systematic removal of elements, minimal finish on last bar."
+      }
+    ],
+    "keyConcepts": [
+      "Syncopation",
+      "Ghost Notes",
+      "Call and Response",
+      "Layering",
+      "Space"
+    ],
+    "implementationTips": [
+      "Velocity dynamics: ghost notes at 30-50%",
+      "Open hat duration matters: let ring",
+      "Sub kick: felt more than heard, 6-12dB lower than main kick",
+      "Wood block: crisp, high-pass filter below 800Hz",
+      "Experiment with swing/shuffle 8-15%"
+    ]
+  }
+}
