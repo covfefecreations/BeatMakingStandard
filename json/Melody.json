@@ -1,0 +1,154 @@
+{
+  "progressions": [
+    {
+      "id": "p1",
+      "name": "The Pop Standard",
+      "chord_sequence": ["C", "G", "Am", "F"],
+      "description": "The most universally recognizable progression in modern music. Optimistic yet emotionally resonant, it cycles smoothly back to itself infinitely.",
+      "emotional_character": "Hopeful, anthemic, emotionally accessible, bittersweet optimism",
+      "usage_directions": {
+        "best_for": ["Pop", "Indie", "Singer-songwriter", "Worship music"],
+        "hook_strategy": "Place your most memorable melodic phrase over the vi-IV change (bars 3-4) where the emotional peak occurs",
+        "vocal_approach": "Verses can sit in mid-range over I-V, chorus should soar over vi-IV",
+        "production_tip": "Keep verses sparse (just piano/guitar), explode into full production on the chorus",
+        "variation_option": "Substitute iii for vi in bar 3 for a brighter, less common sound (C-G-Em-F)"
+      },
+      "theoretical_context": "Diatonic"
+    },
+    {
+      "id": "p2",
+      "name": "The Minor Climb",
+      "chord_sequence": ["Am", "G", "F", "G"],
+      "description": "A dark, driving progression that creates forward momentum through its stepwise descent and return.",
+      "emotional_character": "Urgent, determined, slightly dark, relentless forward motion",
+      "usage_directions": {
+        "best_for": ["Alternative rock", "Dark pop", "Electronic music", "Gaming soundtracks"],
+        "hook_strategy": "Repeat a short, punchy melodic motif that lands strong rhythmic hits on beat 1 of each bar",
+        "vocal_approach": "Rhythmic, percussive delivery works best—think talk-singing or rap-influenced phrasing",
+        "production_tip": "Layer this with syncopated drums and driving bass; the lack of resolution creates natural loop energy",
+        "variation_option": "Add a III (C major) on bar 4 beat 4 as a pickup to create brief major relief before looping"
+      },
+      "theoretical_context": "Natural minor/Aeolian"
+    },
+    {
+      "id": "p3",
+      "name": "The Descending Resolution",
+      "chord_sequence": ["C", "G", "Am", "Em", "F", "C", "F", "G"],
+      "description": "An 8-chord progression that feels like a complete 4-bar phrase due to its two-chords-per-bar pacing. Creates a sense of journey and satisfying resolution.",
+      "emotional_character": "Narrative, complete, satisfying, cinematic",
+      "usage_directions": {
+        "best_for": ["Ballads", "Acoustic singer-songwriter", "Film scores", "Contemplative music"],
+        "hook_strategy": "Let the chord progression do heavy lifting—use a simple, memorable melody that floats above rather than competing",
+        "vocal_approach": "Long, sustained notes that change with each chord pair; think whole notes or half notes with minimal rhythm",
+        "production_tip": "Use arpeggiated guitar or piano to emphasize the descending bassline; keep percussion minimal",
+        "variation_option": "Play each chord for a full bar at half tempo for a more spacious, emotional feel"
+      },
+      "theoretical_context": "Extended diatonic movement"
+    },
+    {
+      "id": "p4",
+      "name": "The Tension Builder",
+      "chord_sequence": ["Am", "F", "C", "G"],
+      "description": "A rearrangement of Progression 1 that completely changes the emotional arc, creating anticipation and payoff within four bars.",
+      "emotional_character": "Melancholic → hopeful → triumphant, emotional journey",
+      "usage_directions": {
+        "best_for": ["EDM builds", "Emotional pop choruses", "Climactic moments", "Drops"],
+        "hook_strategy": "Build melodic intensity across the four bars—start low and intimate, end high and powerful",
+        "vocal_approach": "Bars 1-2 (Am-F): soft, vulnerable; Bar 3 (C): open up; Bar 4 (G): full power belt or shout",
+        "production_tip": "Perfect for EDM—strip down on vi-IV, introduce elements on I, full drop on V",
+        "variation_option": "Repeat vi-IV for 2 bars, then I-V for 2 bars to extend the tension"
+      },
+      "theoretical_context": "Diatonic"
+    },
+    {
+      "id": "p5",
+      "name": "The Jazzy Resolve",
+      "chord_sequence": ["Fmaj7", "G7", "Em7", "Am"],
+      "description": "Sophisticated movement using 7th chords for richness, creating a dreamy, complex sound.",
+      "emotional_character": "Sophisticated, dreamy, introspective, Sunday morning coffee shop",
+      "usage_directions": {
+        "best_for": ["Neo-soul", "R&B", "Lo-fi hip-hop", "Jazz fusion", "Sophisticated pop"],
+        "hook_strategy": "Use chromatically interesting melodies with passing tones; don’t be afraid of tension notes",
+        "vocal_approach": "Smooth, legato phrasing with subtle runs and embellishments; less is more",
+        "production_tip": "Rhodes electric piano, warm bass, brush drums; let the chord extensions breathe",
+        "variation_option": "Substitute vi7 for vi in bar 4, or replace bar 4 with I for a resolved feeling"
+      },
+      "theoretical_context": "Jazz-influenced with extensions"
+    },
+    {
+      "id": "p6",
+      "name": "The Emotional Roller Coaster",
+      "chord_sequence": ["C", "Em", "Am", "F"],
+      "description": "Stepwise descent through related chords creating a gradual emotional darkening before the IV provides uplift.",
+      "emotional_character": "Wistful, nostalgic, complex emotions, sweet sadness",
+      "usage_directions": {
+        "best_for": ["Indie folk", "Bedroom pop", "Introspective singer-songwriter", "Coming-of-age film scores"],
+        "hook_strategy": "Mirror the emotional arc—start bright and innocent, grow more complex and yearning",
+        "vocal_approach": "Conversational, intimate delivery; imagine telling a bittersweet story",
+        "production_tip": "Acoustic instruments with subtle electronic textures; reverb on vocals for dreaminess",
+        "variation_option": "Insert a ii (Dm) between iii and vi for smoother descent: I-iii-ii-vi-IV"
+      },
+      "theoretical_context": "Diatonic"
+    },
+    {
+      "id": "p7",
+      "name": "The Retro Soul",
+      "chord_sequence": ["C", "Am", "Dm", "G"],
+      "description": "Classic ’50s/’60s progression immortalized in “Stand By Me” and thousands of doo-wop songs.",
+      "emotional_character": "Warm, nostalgic, romantic, timeless",
+      "usage_directions": {
+        "best_for": ["Soul", "R&B", "Retro pop", "Romantic ballads", "Feel-good summer songs"],
+        "hook_strategy": "Classic approach—simple, memorable melody everyone can sing along with",
+        "vocal_approach": "Smooth, sustained notes with soulful embellishments; think Motown vocal styling",
+        "production_tip": "Walking bassline emphasizing root movement; warm, vintage-sounding instruments",
+        "variation_option": "Make all chords 7ths (Cmaj7-Am7-Dm7-G7) for extra sophistication"
+      },
+      "theoretical_context": "Diatonic"
+    },
+    {
+      "id": "p8",
+      "name": "The Hypnotic Loop",
+      "chord_sequence": ["Am", "G", "F", "G"],
+      "description": "Minimalist two-chord feels stretched to four by repeating the bVII. Creates a trance-like, modal quality.",
+      "emotional_character": "Hypnotic, driving, meditative, spacious",
+      "usage_directions": {
+        "best_for": ["Electronic music", "Techno", "Minimal house", "Meditation music", "Underscore"],
+        "hook_strategy": "Use repetitive, mantra-like melodic phrases; let rhythm and timbre create interest",
+        "vocal_approach": "Minimal lyrics, lots of repetition; consider vocoder or heavy effects",
+        "production_tip": "This progression begs for evolving textures and filters rather than traditional arrangement",
+        "variation_option": "Extend to 8 bars and add bIII (C major) in bar 8 for occasional resolution"
+      },
+      "theoretical_context": "Mixolydian/modal"
+    },
+    {
+      "id": "p9",
+      "name": "The Surprise Turn",
+      "chord_sequence": ["C", "F", "Bb", "F"],
+      "description": "The bVII (borrowed from parallel minor) creates a surprising, modal color that sounds both familiar and unexpected.",
+      "emotional_character": "Confident, rebellious, rock-and-roll spirit, slightly bluesy",
+      "usage_directions": {
+        "best_for": ["Rock", "Country", "Americana", "Blues-influenced pop", "Anthemic choruses"],
+        "hook_strategy": "Bold, declarative melodies with strong rhythmic identity; perfect for “whoa-oh” gang vocals",
+        "vocal_approach": "Strong, confident delivery; great for group chants or powerful lead vocals",
+        "production_tip": "Distorted guitars love this progression; also works beautifully on organ or piano",
+        "variation_option": "Add V (G) on bar 4 beat 4 as a turnaround back to I for more traditional resolution"
+      },
+      "theoretical_context": "Mixolydian with borrowed chord"
+    },
+    {
+      "id": "p10",
+      "name": "The Minor Storyteller",
+      "chord_sequence": ["Am", "Dm", "G", "C"],
+      "description": "Minor key progression that ends on major III, creating a question-and-answer arc.",
+      "emotional_character": "Narrative, bittersweet, finding light in darkness, resilient",
+      "usage_directions": {
+        "best_for": ["Folk", "Acoustic ballads", "Story-songs", "Indie rock", "Emotional climaxes"],
+        "hook_strategy": "Structure your melodic hook as a question (bars 1-3) and answer (bar 4) to mirror the harmonic motion",
+        "vocal_approach": "Storytelling delivery; each phrase should feel like a line in a narrative",
+        "production_tip": "Start sparse (just voice and one instrument), build gradually with each loop",
+        "variation_option": "Replace III with i in bar 4 to keep it dark throughout, or use III7 for added complexity"
+      },
+      "theoretical_context": "Natural minor/Aeolian"
+    }
+  ]
+}
