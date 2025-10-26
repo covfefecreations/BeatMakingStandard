@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>BandLab Beat Creation — Workflow Guide</title>
+<meta name="description" content="A concise mobile-first workflow for creating beats in BandLab — foundation, rhythm, melody, bass, arrangement & polish. Includes icons, checklist, and modular cards." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1226;
+    --card:#0f1724;
+    --muted:#9aa4c0;
+    --accent:#7bd389;
+    --accent-2:#6ea8ff;
+    --glass: rgba(255,255,255,0.04);
+    --radius:14px;
+    --max-width:980px;
+    --gap:16px;
+    --glass-2: rgba(255,255,255,0.02);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background: linear-gradient(180deg,var(--bg) 0%, #071025 100%);
+    color:#e6eef8;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.45;
+    padding:24px;
+    display:flex;
+    justify-content:center;
+  }
+  .wrap{
+    width:100%;
+    max-width:var(--max-width);
+  }
+
+  /* Header / Hero */
+  header.hero{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    background:linear-gradient(180deg,var(--glass),var(--glass-2));
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:18px;
+    box-shadow: 0 6px 24px rgba(2,6,23,0.6);
+  }
+  .hero .left{
+    flex:1;
+  }
+  .hero h1{
+    margin:0 0 6px 0;
+    font-size:20px;
+    letter-spacing: -0.3px;
+  }
+  .hero p{margin:0;color:var(--muted);font-size:13px}
+  .hero .cta{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+  }
+  .btn{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.06);
+    padding:8px 12px;
+    border-radius:10px;
+    color:var(--accent);
+    font-weight:600;
+    font-size:13px;
+    cursor:pointer;
+    backdrop-filter: blur(4px);
+  }
+  .btn.primary{
+    background: linear-gradient(90deg,var(--accent),var(--accent-2));
+    color:#061022;
+    border: none;
+  }
+
+  /* Grid / modules */
+  .modules{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap);
+  }
+  .card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: var(--radius);
+    padding:14px;
+    border:1px solid rgba(255,255,255,0.03);
+    box-shadow: 0 8px 30px rgba(4,8,20,0.6);
+  }
+  .card h2{
+    margin:0 0 8px 0;
+    font-size:16px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .card p.lead{margin:0;color:var(--muted);font-size:13px}
+
+  /* icon row */
+  .icon{
+    width:44px;height:44px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    display:inline-grid;place-items:center;border-radius:10px;border:1px solid rgba(255,255,255,0.03);
+    margin-right:8px;
+  }
+  .row{display:flex;align-items:flex-start;gap:12px}
+
+  /* checklist */
+  .checklist{margin-top:12px;padding:10px;background:rgba(0,0,0,0.12);border-radius:10px}
+  .checklist ul{margin:0;padding:0 0 0 18px;color:var(--muted);font-size:13px}
+  .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .chip{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:999px;font-size:12px;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
+
+  /* arrangement timeline preview */
+  .timeline{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .block{
+    min-width:60px;height:30px;border-radius:6px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);border:1px solid rgba(255,255,255,0.03)
+  }
+
+  /* footer / export area */
+  .tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .muted{color:var(--muted);font-size:13px}
+
+  /* collapsible detail */
+  .detail{margin-top:10px;display:none;color:var(--muted);font-size:13px}
+  .card.open .detail{display:block}
+
+  /* layout tweaks for bigger screens */
+  @media(min-width:860px){
+    .modules{grid-template-columns: 1fr 1fr; }
+    header.hero{align-items:center}
+  }
+
+  /* small utility */
+  .tiny{font-size:12px;color:var(--muted)}
+  .icon svg{width:22px;height:22px;display:block}
+  a.anchor{color:var(--accent-2);text-decoration:none}
+  footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap" role="main">
+
+  <header class="hero" aria-labelledby="pageTitle">
+    <div class="left">
+      <h1 id="pageTitle">BandLab Beat Creation — Quick Workflow</h1>
+      <p class="lead">Mobile-first guide: Foundation → Rhythm → Melody → Bass → Arrangement & Polish. Modular cards, icons and a shareable checklist.</p>
+
+      <div class="cta">
+        <button class="btn primary" id="copyChecklist">Copy Checklist</button>
+        <button class="btn" id="openAll">Expand All</button>
+      </div>
+    </div>
+
+    <div class="right tiny" style="text-align:right;">
+      <div style="font-weight:700;font-size:12px">Anchor phrases</div>
+      <div class="muted">Loop → Landscape</div>
+      <div class="muted">"Groove before glamour"</div>
+    </div>
+  </header>
+
+  <nav aria-label="Quick nav" style="margin-bottom:12px;">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <a class="btn" href="#foundation">Foundation</a>
+      <a class="btn" href="#rhythm">Rhythm</a>
+      <a class="btn" href="#melody">Melody</a>
+      <a class="btn" href="#bass">Bass</a>
+      <a class="btn" href="#arrange">Arrange & Polish</a>
+    </div>
+  </nav>
+
+  <section class="modules" aria-label="Workflow modules">
+
+    <!-- 1 FOUNDATION -->
+    <article id="foundation" class="card" role="article" aria-labelledby="fTitle">
+      <div class="row">
+        <div class="icon" aria-hidden="true">
+          <!-- slider icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="6" width="18" height="4" rx="1.5"></rect>
+            <rect x="3" y="14" width="12" height="4" rx="1.5"></rect>
+            <circle cx="16" cy="8" r="1.6"></circle>
+            <circle cx="8" cy="16" r="1.6"></circle>
+          </svg>
+        </div>
+        <div style="flex:1">
+          <h2 id="fTitle">1. Foundation — Set Your Canvas</h2>
+          <p class="lead">Start a new project in BandLab. Set tempo, key, and choose a drum kit.</p>
+
+          <div class="checklist" aria-hidden="false">
+            <ul>
+              <li>New Project → Create from Scratch</li>
+              <li>Set BPM (tempo) & choose key</li>
+              <li>Add Drum Machine / Drum Track (e.g., 808 or Lo-Fi)</li>
+              <li>Save project with clear name + tags</li>
+            </ul>
+          </div>
+
+          <div class="meta">
+            <span class="chip">Anchor phrase: <strong>“Set the stage”</strong></span>
+            <span class="chip">Icon motif: slider → canvas</span>
+          </div>
+
+          <div class="detail">
+            Notes: Quick presets save time. For teaching, include sample BPM presets for genres (Hip-Hop 70–95, Pop 100–130, EDM 120–150).
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2 RHYTHM -->
+    <article id="rhythm" class="card" role="article" aria-labelledby="rTitle">
+      <div class="row">
+        <div class="icon" aria-hidden="true">
+          <!-- drum grid icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="18" rx="2"></rect>
+            <path d="M6 8h12M6 12h12M6 16h6"></path>
+          </svg>
+        </div>
+
+        <div style="flex:1">
+          <h2 id="rTitle">2. Rhythm — Build the Groove</h2>
+          <p class="lead">Create a strong 4-bar loop focusing on kick + snare, then hats and percussion for texture.</p>
+
+          <div class="checklist">
+            <ul>
+              <li>Program kick + snare first</li>
+              <li>Add hi-hat pattern (vary velocities)</li>
+              <li>Layer percussion & fills</li>
+              <li>Loop and pick the strongest 4 bars</li>
+            </ul>
+          </div>
+
+          <div class="meta">
+            <span class="chip">Technique: humanize velocity</span>
+            <span class="chip">Teaching tip: show before/after dynamics</span>
+          </div>
+
+          <div class="detail">
+            Notes: Use simple call-and-response between kick and snare; use offbeat hats to add forward motion. Keep low complexity early.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3 MELODY -->
+    <article id="melody" class="card" role="article" aria-labelledby="mTitle">
+      <div class="row">
+        <div class="icon" aria-hidden="true">
+          <!-- piano icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+            <path d="M6 6v12M10 6v12M14 6v12"></path>
+          </svg>
+        </div>
+
+        <div style="flex:1">
+          <h2 id="mTitle">3. Melody — Create the Hook</h2>
+          <p class="lead">Add instrument tracks for chords & a short repeating motif that becomes your hook.</p>
+
+          <div class="checklist">
+            <ul>
+              <li>Add Software Instrument (synth/piano/pad)</li>
+              <li>Create chord progression (simple templates: I–VI–V–IV)</li>
+              <li>Write short melodic motif (4 bars)</li>
+              <li>Quantize lightly — keep musical timing</li>
+            </ul>
+          </div>
+
+          <div class="meta">
+            <span class="chip">Anchor phrase: <strong>“Hook > Hype”</strong></span>
+            <span class="chip">Icon motif: keys → motif</span>
+          </div>
+
+          <div class="detail">
+            Notes: Use inversion and sparse voicings to make space for the vocal. Duplicate motif across octaves for texture.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4 BASS -->
+    <article id="bass" class="card" role="article" aria-labelledby="bTitle">
+      <div class="row">
+        <div class="icon" aria-hidden="true">
+          <!-- bass waveform -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12h3l2-6 3 12 2-8 3 6h4"></path>
+          </svg>
+        </div>
+
+        <div style="flex:1">
+          <h2 id="bTitle">4. Bass — Ground the Energy</h2>
+          <p class="lead">Add 808 or bass synth tuned to the key; lock it rhythmically with the kick.</p>
+
+          <div class="checklist">
+            <ul>
+              <li>Choose bass instrument (808, sub, synth bass)</li>
+              <li>Tune bass notes to the project key</li>
+              <li>Align bass hits with kicks for cohesion</li>
+              <li>Gentle sidechain or ducking if needed</li>
+            </ul>
+          </div>
+
+          <div class="meta">
+            <span class="chip">Technique: tune 808 to note</span>
+            <span class="chip">Icon motif: low waves</span>
+          </div>
+
+          <div class="detail">
+            Notes: If using an 808, make sure the tail doesn't clash with kick; use a transient shaper or short fade for clarity.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 5 ARRANGEMENT -->
+    <article id="arrange" class="card" role="article" aria-labelledby="aTitle">
+      <div class="row">
+        <div class="icon" aria-hidden="true">
+          <!-- arrange timeline icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+            <path d="M7 9h3M7 14h6M7 11h10"></path>
+          </svg>
+        </div>
+
+        <div style="flex:1">
+          <h2 id="aTitle">5. Arrangement & Polish — Turn Loops into a Track</h2>
+          <p class="lead">Make sections, create transitions, add FX, and use BandLab's mastering to finish.</p>
+
+          <div class="timeline" aria-hidden="true">
+            <div class="block">Intro</div>
+            <div class="block">Verse</div>
+            <div class="block">Hook</div>
+            <div class="block">Bridge</div>
+            <div class="block">Hook</div>
+            <div class="block">Outro</div>
+          </div>
+
+          <div class="checklist">
+            <ul>
+              <li>Copy loop into sections (8–16 bars)</li>
+              <li>Create tension & release (muting, layer changes)</li>
+              <li>Add effects (reverb, delay, EQ, gentle compression)</li>
+              <li>Use BandLab Mastering for final polish & export</li>
+            </ul>
+          </div>
+
+          <div class="meta">
+            <span class="chip">Anchor phrase: <strong>“Loop → Landscape”</strong></span>
+            <span class="chip">Icon motif: timeline tiles</span>
+          </div>
+
+          <div class="detail">
+            Notes: For teaching, show an arrangement screenshot with regions color-coded. Offer stems for download to practice remixing.
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- Extras: Tips, SVG concepts, export -->
+  <section class="card" aria-label="Extras & Resources">
+    <h2>Extras — Icons, Motifs, & Portfolio Ideas</h2>
+    <p class="muted">Use these suggestions to modularize into SVG cards, brand motifs, or portfolio assets.</p>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+      <div style="flex:1;min-width:200px">
+        <h3 style="margin:6px 0 6px 0;font-size:14px">SVG/Icon Concepts</h3>
+        <ul class="muted">
+          <li><strong>Slider → Canvas:</strong> rectangle + slider knob motif for Foundation card</li>
+          <li><strong>Grid → Pulse:</strong> drum-grid icons using 4×4 dots for Rhythm</li>
+          <li><strong>Loop ring:</strong> circular motif that morphs into a landscape waveform for the hero animation</li>
+        </ul>
+      </div>
+
+      <div style="flex:1;min-width:200px">
+        <h3 style="margin:6px 0 6px 0;font-size:14px">Anchor Phrases / Mini-mantras</h3>
+        <ul class="muted">
+          <li>“Groove before glamour”</li>
+          <li>“Hook > Hype”</li>
+          <li>“Loop → Landscape”</li>
+        </ul>
+      </div>
+
+      <div style="flex:1;min-width:200px">
+        <h3 style="margin:6px 0 6px 0;font-size:14px">Portfolio / Monetization Ideas</h3>
+        <ul class="muted">
+          <li>Make a downloadable 1-page infographic PDF (sell or offer as lead magnet)</li>
+          <li>Turn each module into a short tutorial video (YouTube series or paid mini-course)</li>
+          <li>Offer project templates for BandLab with pre-built loops (paid pack)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tools">
+      <button class="btn" id="downloadSVG">Download SVG Kit (zip)</button>
+      <button class="btn" id="copyAll">Copy All Text</button>
+      <span class="muted" style="align-self:center">Tip: convert cards to .svg for animated microinteractions on your site.</span>
+    </div>
+  </section>
+
+  <footer>
+    <div class="muted">Made for quick teaching, modularization, and fast delivery. — Use the anchor phrases as UI microcopy in your dashboard.</div>
+  </footer>
+
+</div>
+
+<script>
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  // Expand / collapse cards
+  document.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('click', (ev)=>{
+      // if click target is a link or button, ignore
+      if(ev.target.closest('a') || ev.target.closest('button')) return;
+      card.classList.toggle('open');
+    });
+  });
+
+  // Expand all button
+  document.getElementById('openAll').addEventListener('click', ()=>{
+    document.querySelectorAll('.card').forEach(c=>c.classList.add('open'));
+  });
+
+  // Copy checklist: collects all checklist lines into clipboard
+  function getAllChecklistText(){
+    const lines=[];
+    document.querySelectorAll('.checklist ul').forEach(ul=>{
+      ul.querySelectorAll('li').forEach(li=>{
+        lines.push('- ' + li.textContent.trim());
+      });
+    });
+    return lines.join('\\n');
+  }
+
+  document.getElementById('copyChecklist').addEventListener('click', async ()=>{
+    const text = getAllChecklistText();
+    try{
+      await navigator.clipboard.writeText(text);
+      const orig = document.getElementById('copyChecklist').textContent;
+      document.getElementById('copyChecklist').textContent = 'Copied ✓';
+      setTimeout(()=> document.getElementById('copyChecklist').textContent = orig, 1500);
+    }catch(e){
+      alert('Copy failed — your browser may block clipboard access. Here is the checklist:\\n\\n' + text);
+    }
+  });
+
+  // Copy all text
+  document.getElementById('copyAll').addEventListener('click', async ()=>{
+    const all = Array.from(document.querySelectorAll('h1,h2,h3,p,li')).map(n=>n.textContent.trim()).join('\\n\\n');
+    try{
+      await navigator.clipboard.writeText(all);
+      const btn = document.getElementById('copyAll');
+      const old = btn.textContent;
+      btn.textContent = 'Copied ✓';
+      setTimeout(()=> btn.textContent = old, 1500);
+    }catch(e){
+      alert('Copy failed — here is the full text:\\n\\n' + all);
+    }
+  });
+
+  // Placeholder for "Download SVG Kit": this cannot create files client-side without extra libs.
+  document.getElementById('downloadSVG').addEventListener('click', ()=>{
+    alert('This button is a placeholder. To generate an SVG kit, export each icon as an SVG file and zip them. I can generate the SVG source strings if you want — say "generate SVG kit".');
+  });
+
+  // Accessibility: hide focus outlines except when keyboarding
+  (function(){
+    const body = document.body;
+    function handleMouse(){ body.classList.add('using-mouse'); }
+    function handleKey(e){ if(e.key === 'Tab') body.classList.remove('using-mouse'); }
+    window.addEventListener('mousedown', handleMouse);
+    window.addEventListener('keydown', handleKey);
+  })();
+</script>
+</body>
+</html>
