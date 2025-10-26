@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Master Music Map — Drums • Hooks • Bass</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  :root{
+    --bg:#0f0f10;
+    --panel:#111214;
+    --muted:#9aa0a6;
+    --accent:#FFD166;
+    --chord:#1E90FF;
+    --drum:#FF8C00;
+    --bass:#32CD32;
+    --grid:#222;
+  }
+  body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:#eee;}
+  header{padding:18px 24px;border-bottom:1px solid #121214;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);}
+  h1{margin:0;font-size:18px;font-weight:600}
+  p.lead{margin:6px 0 0;color:var(--muted);font-size:13px}
+  #app{display:flex;gap:18px;padding:18px;box-sizing:border-box;}
+  #controls{width:320px;background:var(--panel);border-radius:10px;padding:14px;border:1px solid #1a1a1a;}
+  #canvasWrap{flex:1;overflow:auto;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:10px;border:1px solid #101010;}
+  button {background:transparent;border:1px solid #333;color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer}
+  button.primary{background:var(--accent);color:#111;border:none}
+  .row{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+  label.small{font-size:12px;color:var(--muted);display:block;margin-bottom:6px}
+  .stat{font-size:13px;color:var(--muted)}
+  #tooltip{position:fixed;display:none;pointer-events:none;background:#091017;border:1px solid #182229;padding:10px;border-radius:8px;color:#e6eef5;max-width:300px;z-index:9999;font-size:13px}
+  .legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .legend .item{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--muted)}
+  .dot{width:12px;height:12px;border-radius:50%}
+  /* small responsive */
+  @media (max-width:900px){#app{flex-direction:column}#controls{width:100%}}
+  /* SVG styles */
+  .layerLabel{fill:#9fb3d6;font-size:12px}
+  .chordNode{cursor:pointer;stroke:#fff;stroke-width:1;transition:transform .12s}
+  .drumNode{cursor:pointer;stroke:#222;stroke-width:1}
+  .bassNode{cursor:pointer;stroke:#white;stroke-width:1}
+  .active{filter:drop-shadow(0 6px 14px rgba(0,0,0,0.7));}
+  .playhead{stroke:#fff;stroke-width:2;opacity:0.9}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Master Music Map — Drums · Hook/Melody · Bass</h1>
+  <p class="lead">Interactive visualization of your drum grooves, chord progressions, and bass examples. Use play to animate the timeline.</p>
+</header>
+
+<div id="app">
+  <aside id="controls">
+    <div class="row"><div><strong>Timeline</strong><div class="stat">Bars: <span id="barCount">32</span> • Subdivisions: <span id="subCount">16</span></div></div></div>
+    <div class="row">
+      <button id="playBtn" class="primary">Play</button>
+      <button id="pauseBtn">Pause</button>
+      <button id="resetBtn">Reset</button>
+    </div>
+
+    <div style="margin-top:12px">
+      <label class="small">Playback BPM</label>
+      <input id="bpmInput" type="range" min="60" max="180" value="110" style="width:100%"/>
+      <div class="stat">BPM: <span id="bpmVal">110</span></div>
+    </div>
+
+    <div style="margin-top:12px">
+      <label class="small">Zoom (bar width)</label>
+      <input id="zoom" type="range" min="20" max="80" value="36" style="width:100%"/>
+      <div class="stat">Bar width: <span id="zoomVal">36</span> px</div>
+    </div>
+
+    <div style="margin-top:14px">
+      <div class="legend">
+        <div class="item"><span class="dot" style="background:var(--chord)"></span>Chords</div>
+        <div class="item"><span class="dot" style="background:var(--drum)"></span>Drums</div>
+        <div class="item"><span class="dot" style="background:var(--bass)"></span>Bass</div>
+        <div class="item"><span class="dot" style="background:var(--accent)"></span>Playhead</div>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid #151619;margin:12px 0" />
+
+    <div style="font-size:13px;color:var(--muted)">
+      <strong>Interaction</strong>
+      <ul style="padding-left:18px;margin:8px 0 0;color:var(--muted)">
+        <li>Hover nodes → see metadata tooltip</li>
+        <li>Click nodes → pin/highlight</li>
+        <li>Play → timeline animates; nodes light up on their subdivisions</li>
+      </ul>
+    </div>
+  </aside>
+
+  <main id="canvasWrap">
+    <svg id="masterSvg" xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid meet"></svg>
+  </main>
+</div>
+
+<div id="tooltip"></div>
+
+<script>
+/* ===========================
+   Embedded JSON data (from user)
+   =========================== */
+
+/* Drum groove JSON (condensed to the version you provided earlier) */
+const drumJson = {
+  "tutorialTitle": "Rhythm/Groove Building Reference Guide",
+  "tempoBPM": 110,
+  "key": "A Minor",
+  "soundPalette": [
+    {"name": "Kick"}, {"name": "Kick2"}, {"name": "Sub Kick"}, {"name": "Snare"},
+    {"name": "Clap"}, {"name": "Open Hat"}, {"name": "Closed Hat"}, {"name": "Tom"}, {"name": "Wood"}
+  ],
+  "grooves": [
+    {
+      "name": "Intro",
+      "bars": [
+        {"barNumber":1,"description":"Minimal - Establishing pulse","notation": {
+          "Kick":"X - - - - - - - X - - - - - - -",
+          "Kick2":"- - - - - - - - - - - - - - - -",
+          "Sub Kick":"- - - - - - - - - - - - - - - -",
+          "Snare":"- - - - - - - - - - - - - - - -",
+          "Clap":"- - - - - - - - - - - - - - - -",
+          "Open Hat":"- - - - - - - - - - - - - - - -",
+          "Closed Hat":"X - - - X - - - X - - - X - - -",
+          "Tom":"- - - - - - - - - - - - - - - -",
+          "Wood":"- - - - - - - - - - - - - - - -"
+        }},
+        {"barNumber":2,"description":"Add backbeat","notation":{
+          "Kick":"X - - - - - - - X - - - - - - -",
+          "Snare":"- - - - X - - - - - - - X - - -",
+          "Closed Hat":"X - - - X - - - X - - - X - - -"
+        }},
+        {"barNumber":3,"description":"Increase subdivision","notation":{
+          "Kick":"X - - - - - - - X - - - - - - -",
+          "Snare":"- - - - X - - - - - - - X - - -",
+          "Open Hat":"- - - - - - - X - - - - - - - X",
+          "Closed Hat":"X - X - - - X - X - X - - - X -"
+        }},
+        {"barNumber":4,"description":"Full intro with fill","notation":{
+          "Kick":"X - - - - - - - X - - - - - - -",
+          "Sub Kick":"X - - - - - - - X - - - - - - -",
+          "Snare":"- - - - X - - - - - - - X - x x",
+          "Clap":"- - - - X - - - - - - - X - - -",
+          "Open Hat":"- - - - - - - X - - - - - - - -",
+          "Closed Hat":"X - X - - - X - X - X - - - - -",
+          "Tom":"- - - - - - - - - - - - - X X -"
+        }}
+      ]
+    },
+    {
+      "name": "Chorus",
+      "bars": [
+        {"barNumber":5,"description":"Main chorus groove","notation":{
+          "Kick":"X - - - - - X - X - - - - - - -",
+          "Kick2":"- - - - - - - - - - - x - - - -",
+          "Sub Kick":"X - - - - - - - X - - - - - - -",
+          "Snare":"- - - - X - - - - - - - X - - -",
+          "Clap":"- - - - X - - - - - - - X - - -",
+          "Open Hat":"- - - - - - - X - - - - - - - X",
+          "Closed Hat":"X - X - - - X - X - X - - - X -"
+        }},
+        {"barNumber":6,"description":"Chorus repeat - (pattern continues)","notation":{
+          "Kick":"X - - - - - X - X - - - - - - -",
+          "Closed Hat":"X - X - - - X - X - X - - - X -"
+        }},
+        {"barNumber":7,"description":"Chorus variation","notation":{
+          "Kick":"X - - - - - X - X - - - - - X -",
+          "Kick2":"- - - x - - - - - - - x - - - x"
+        }},
+        {"barNumber":8,"description":"Chorus continue","notation":{
+          "Kick":"X - - - - - X - X - - - - - - -",
+          "Closed Hat":"X - X - - - X - X - X - - - X -"
+        }}
+      ]
+    },
+    {
+      "name":"Verse",
+      "bars":[
+        {"barNumber":13,"description":"Minimal verse foundation","notation":{
+          "Kick":"X - - - - - - - X - - - - - - -",
+          "Snare":"- - - - X - - - - - - - X - - -",
+          "Open Hat":"- - - - - - - X - - - - - - - -",
+          "Closed Hat":"X - X - X - X - X - X - X - X -"
+        }},
+        {"barNumber":15,"description":"Add ghost snare for groove","notation":{
+          "Kick":"X - - - - - - - X - - - - - - -",
+          "Snare":"- - - - x X - - x - - - x X - - -",
+          "Closed Hat":"X - X - X - X - X - X - X - X -"
+        }},
+        {"barNumber":17,"description":"Introduce Kick2 syncopation","notation":{
+          "Kick":"X - - - - - - - X - - - - - - -",
+          "Kick2":"- - - - - - X - - - - - - - X -",
+          "Closed Hat":"X - X - X - X - X - X - X - X -"
+        }},
+        {"barNumber":25,"description":"Add sub kick for weight","notation":{
+          "Kick":"X - - - - - X - X - - - - - X -",
+          "Kick2":"- - - - - - - - - - - x - - - x",
+          "Sub Kick":"X - - - - - - - X - - - - - X -",
+          "Closed Hat":"X - X - X - X - X - X - X - X -"
+        }},
+        {"barNumber":28,"description":"Pre-outro fill preparation","notation":{
+          "Kick":"X - - - - - X - X - - - - - - -",
+          "Kick2":"- - - - - - - - - - - x - - - -",
+          "Sub Kick":"X - - - - - - - X - - - - - - -",
+          "Snare":"- - - - x X - - x - - - x X x x x",
+          "Tom":"- - - - - - - - - - - - - X X X"
+        }}
+      ]
+    },
+    {
+      "name":"Outro",
+      "bars":[
+        {"barNumber":29,"description":"Maintain energy, remove sub kick","notation":{
+          "Kick":"X - - - - - X - X - - - - - X -",
+          "Kick2":"- - - - - - - - - - - x - - - -",
+          "Snare":"- - - - X - - - - - - - X - - -",
+          "Clap":"- - - - X - - - - - - - X - - -",
+          "Open Hat":"- - - - - - - X - - - - - - - X",
+          "Closed Hat":"X - X - - - X - X - X - - - X -"
+        }},
+        {"barNumber":32,"description":"Final bar - kick only","notation":{
+          "Kick":"X - - - - - - - - - - - - - - -"
+        }}
+      ]
+    }
+  ],
+  "grooveAnalysis": {
+    "sections":[
+      {"sectionName":"Intro","barRange":"1-4","description":"Progressive layering."},
+      {"sectionName":"Chorus","barRange":"5-12","description":"Full arrangement."},
+      {"sectionName":"Verse","barRange":"13-28","description":"Stripped arrangement."},
+      {"sectionName":"Outro","barRange":"29-32","description":"Wind down."}
+    ],
+    "keyConcepts":["Syncopation","Ghost Notes","Call and Response","Layering","Space"],
+    "implementationTips":["Ghost notes at 30-50% velocity","Open hat ring", "Sub kick -6 to -12dB", "HPF wood under 800Hz"]
+  }
+};
+
+/* Hook / Melody JSON (full list you provided) */
+const hookJson = {
+  "progressions": [
+    {"id":"p1","name":"The Pop Standard","chord_sequence":["C","G","Am","F"],"description":"Optimistic yet emotionally resonant","emotional_character":"Hopeful, anthemic"},
+    {"id":"p2","name":"The Minor Climb","chord_sequence":["Am","G","F","G"],"description":"Dark, driving progression","emotional_character":"Urgent, determined"},
+    {"id":"p3","name":"The Descending Resolution","chord_sequence":["C","G","Am","Em","F","C","F","G"],"description":"Cinematic, satisfying","emotional_character":"Narrative, complete"},
+    {"id":"p4","name":"The Tension Builder","chord_sequence":["Am","F","C","G"],"description":"Anticipation and payoff","emotional_character":"Melancholic → hopeful → triumphant"},
+    {"id":"p5","name":"The Jazzy Resolve","chord_sequence":["Fmaj7","G7","Em7","Am"],"description":"Dreamy, sophisticated","emotional_character":"Introspective"},
+    {"id":"p6","name":"The Emotional Roller Coaster","chord_sequence":["C","Em","Am","F"],"description":"Wistful, nostalgic","emotional_character":"Sweet sadness"},
+    {"id":"p7","name":"The Retro Soul","chord_sequence":["C","Am","Dm","G"],"description":"Timeless, warm","emotional_character":"Nostalgic"},
+    {"id":"p8","name":"The Hypnotic Loop","chord_sequence":["Am","G","F","G"],"description":"Trance-like modal quality","emotional_character":"Hypnotic, driving"},
+    {"id":"p9","name":"The Surprise Turn","chord_sequence":["C","F","Bb","F"],"description":"Mixolydian color","emotional_character":"Confident, rebellious"},
+    {"id":"p10","name":"The Minor Storyteller","chord_sequence":["Am","Dm","G","C"],"description":"Question-and-answer arc","emotional_character":"Narrative, resilient"}
+  ]
+};
+
+/* Bass JSON (full examples you provided) */
+const bassJson = {
+  "module":"Bass Rhythms",
+  "examples": [
+    {"id":"bass_1","title":"The Foundation","progression":"C - G - Am - F","energy":"Minimal","notation":"C---- | G---- | A---- | F----"},
+    {"id":"bass_2","title":"The Heartbeat","progression":"Am - G - F - G","energy":"Low-Medium","notation":"A A A A | G G G G | F F F F | G G G G"},
+    {"id":"bass_3","title":"The Bounce","progression":"C - G - Am - F","energy":"Medium","notation":"C g C g | G d G d | A e A e | F c F c"},
+    {"id":"bass_4","title":"The Funk Foundation","progression":"Am - Am - Am - Am","energy":"High","notation":"Syncopated 16ths with ghost notes"},
+    {"id":"bass_5","title":"The Walking Line","progression":"Cmaj7 - Am7 - Dm7 - G7","energy":"Medium","notation":"C E G B | A G F E | D F A C | G F E D"},
+    {"id":"bass_6","title":"The Disco Drive","progression":"Am - F - C - G","energy":"Medium-High","notation":"A a A · | F f F · | C c C · | G g G ·"},
+    {"id":"bass_7","title":"The Reggae One-Drop","progression":"C - Am - F - G","energy":"Medium","notation":"notes on +'s (offbeat)"},
+    {"id":"bass_8","title":"The Anticipation","progression":"C - G - Am - F","energy":"Medium-High","notation":"anticipation on 'a' of beat 4"},
+    {"id":"bass_9","title":"The Pedal Tone Groove","progression":"Am - F - C - G","energy":"Medium","notation":"A pedal throughout with re-attacks"},
+    {"id":"bass_10","title":"The Chromatic Climber","progression":"C - Em - F - G","energy":"Medium","notation":"chromatic connectors"}
+  ]
+};
+
+
+/* ===============
+   Visualization variables
+   =============== */
+const svg = document.getElementById('masterSvg');
+let BAR_COUNT = 32;
+const SUBDIV = 16; // 16 subdivisions per bar (16th-grid)
+let barWidth = 36; // px per bar (zoom controls this)
+const topOffset = 40; // padding top
+const layerY = { chords: 80, drums: 180, bass: 300 };
+const nodeRadius = { chord: 18, drum: 6, bass: 12 };
+
+/* dynamically size SVG */
+function setSvgSize(){
+  const width = Math.max(900, BAR_COUNT * barWidth + 160);
+  svg.setAttribute('width', width);
+  svg.setAttribute('viewBox', `0 0 ${width} 420`);
+}
+setSvgSize();
+
+/* Draw grid lines for bars */
+function drawGrid(){
+  svg.innerHTML = ''; // clear
+  const w = parseInt(svg.getAttribute('viewBox').split(' ')[2]);
+  // background rect
+  const bg = document.createElementNS(svg.namespaceURI, 'rect');
+  bg.setAttribute('x',0); bg.setAttribute('y',0); bg.setAttribute('width',w); bg.setAttribute('height',420);
+  bg.setAttribute('fill','transparent');
+  svg.appendChild(bg);
+
+  // layer labels
+  const labels = [
+    {y:layerY.chords,label:'Chords / Hook (top)'},
+    {y:layerY.drums,label:'Drums (middle)'},
+    {y:layerY.bass,label:'Bass Examples (bottom)'}
+  ];
+  labels.forEach(L=>{
+    const t = document.createElementNS(svg.namespaceURI,'text');
+    t.setAttribute('x',12); t.setAttribute('y',L.y-30); t.setAttribute('class','layerLabel');
+    t.textContent = L.label;
+    svg.appendChild(t);
+  });
+
+  // vertical bars
+  for(let b=0;b<BAR_COUNT;b++){
+    const x = 80 + b*barWidth;
+    const line = document.createElementNS(svg.namespaceURI,'line');
+    line.setAttribute('x1',x); line.setAttribute('y1',20); line.setAttribute('x2',x); line.setAttribute('y2',400);
+    line.setAttribute('stroke', (b%4===0)?'#1b2630':'#151820'); line.setAttribute('stroke-width',(b%4===0)?1.2:0.6);
+    svg.appendChild(line);
+    // bar number label every 4 bars
+    if((b+1)%4===0){
+      const tb = document.createElementNS(svg.namespaceURI,'text');
+      tb.setAttribute('x',x + barWidth/2); tb.setAttribute('y',18); tb.setAttribute('text-anchor','middle'); tb.setAttribute('fill','#9aa6b3'); tb.setAttribute('font-size','11');
+      tb.textContent = `Bar ${b+1}`;
+      svg.appendChild(tb);
+    }
+  }
+}
+
+/* Helper: parse notation string for a given instrument in a bar into an array of 16 chars */
+function parseNotationString(notationStr){
+  // notationStr examples like: "X - - - - - - - X - - - - - - -" with 16 tokens separated by spaces
+  if(!notationStr) return Array(SUBDIV).fill('-');
+  const tokens = notationStr.trim().split(/\s+/);
+  if(tokens.length===SUBDIV) return tokens;
+  // fallback: try to split by characters (not ideal) or pad
+  const flat = notationStr.replace(/\s+/g,'').split('');
+  const arr = [];
+  for(let i=0;i<SUBDIV;i++) arr.push(flat[i] || '-');
+  return arr;
+}
+
+/* Build a lookup of drum hits keyed by absolute subdivision index (0..BAR_COUNT*SUBDIV-1) */
+function buildDrumNodes(){
+  const nodes = []; // each node: {x,y,bar,index,inst,token}
+  // iterate grooves -> bars -> notation
+  drumJson.grooves.forEach(groove=>{
+    (groove.bars||[]).forEach(barObj=>{
+      const bar = barObj.barNumber;
+      const notation = barObj.notation || {};
+      // for each instrument present in notation
+      Object.keys(notation).forEach(instRaw=>{
+        const inst = instRaw; // e.g. "Kick" or "Closed Hat"
+        const tokens = parseNotationString(notation[instRaw]);
+        tokens.forEach((tok,idx)=>{
+          if(tok && tok!=='-' && tok!=='·'){ // treat X, x, •, etc. as hits
+            const absIndex = (bar-1)*SUBDIV + idx;
+            const x = 80 + (bar-1)*barWidth + (idx/SUBDIV)*barWidth;
+            const y = layerY.drums + (soundPaletteIndex(inst) * 14) - 40; // stack small rows by instrument
+            nodes.push({x,y,bar,subIdx:idx,absIndex,inst,token:tok});
+          }
+        });
+      });
+    });
+  });
+  return nodes;
+}
+
+/* helper to pick a small vertical offset per instrument so nodes don't entirely sit on top of each other */
+function soundPaletteIndex(instName){
+  // map common names to index
+  const order = ['Kick','Kick2','Sub Kick','SubKick','Snare','Clap','Open Hat','OpenHat','Closed Hat','ClosedHat','Tom','Wood','TomHigh','TomMid','TomLow','Floor Tom'];
+  const idx = order.findIndex(o=>o.toLowerCase() === instName.toLowerCase());
+  return (idx<0)?(order.length-1):idx;
+}
+
+/* Draw chord rows for each progression (top area) */
+function drawChords(){
+  // We'll draw each progression on its own horizontal row (max 10 rows) — cycle progressions vertically if needed
+  const progPerCol = 4; // how many bars per progression usually
+  hookJson.progressions.forEach((prog,progIdx)=>{
+    // choose a starting bar for this progression so they don't overlap — lay them out by rows of 8 bars each
+    const row = Math.floor(progIdx / 1); // one progression per row vertically
+    const y = layerY.chords + row * 36;
+    // draw each chord as repeated across bars to show its loop (we'll place one loop starting at bar 1 for demo)
+    const seq = prog.chord_sequence;
+    const loopBars = seq.length;
+    // We will tile the progression from bar 1 to whichever fits
+    for(let i=0;i<loopBars;i++){
+      const barNum = i+1; // place starting at the left (for demonstration); you can change placement rules later
+      const cx = 80 + (barNum-1)*barWidth + barWidth/2;
+      const circle = document.createElementNS(svg.namespaceURI,'circle');
+      circle.setAttribute('cx',cx); circle.setAttribute('cy',y); circle.setAttribute('r',nodeRadius.chord);
+      circle.setAttribute('fill',getComputedStyle(document.documentElement).getPropertyValue('--chord').trim() || '#1E90FF');
+      circle.setAttribute('class','chordNode');
+      // data
+      circle.dataset.chord = seq[i];
+      circle.dataset.progression = prog.name;
+      circle.dataset.desc = prog.description;
+      circle.dataset.emotion = prog.emotional_character;
+      circle.dataset.bar = barNum;
+      svg.appendChild(circle);
+      // text label
+      const tx = document.createElementNS(svg.namespaceURI,'text');
+      tx.setAttribute('x',cx); tx.setAttribute('y',y+5); tx.setAttribute('fill','#fff'); tx.setAttribute('font-size','12'); tx.setAttribute('text-anchor','middle');
+      tx.textContent = seq[i];
+      svg.appendChild(tx);
+      // mouse events
+      attachTooltipEvents(circle, () => `<strong>${seq[i]}</strong><br>${prog.name}<br>${prog.description}<br><em>${prog.emotional_character}</em>`);
+      circle.addEventListener('click', (e)=> e.target.classList.toggle('active'));
+    }
+  });
+}
+
+/* Draw drum nodes from notation */
+function drawDrums(drumNodes){
+  // draw small circles for each node
+  drumNodes.forEach(d=>{
+    const c = document.createElementNS(svg.namespaceURI,'circle');
+    c.setAttribute('cx',d.x); c.setAttribute('cy',d.y); c.setAttribute('r',nodeRadius.drum);
+    c.setAttribute('fill',getComputedStyle(document.documentElement).getPropertyValue('--drum').trim() || '#FF8C00');
+    c.setAttribute('class','drumNode');
+    c.dataset.inst = d.inst;
+    c.dataset.bar = d.bar;
+    c.dataset.sub = d.subIdx;
+    c.dataset.token = d.token;
+    svg.appendChild(c);
+    attachTooltipEvents(c, ()=>`<strong>${d.inst}</strong><br>Bar ${d.bar} • Sub ${d.subIdx+1}<br>Token: ${d.token}`);
+    c.addEventListener('click', e=> e.target.classList.toggle('active'));
+  });
+}
+
+/* Draw bass example nodes (represent each example as 4-bar block) */
+function drawBass(){
+  bassJson.examples.forEach((b,i)=>{
+    const startBar = 1 + i*4; // space them across the timeline
+    const cx = 80 + (startBar-1)*barWidth + (barWidth*2); // center of the 4-bar block
+    const cy = layerY.bass;
+    const g = document.createElementNS(svg.namespaceURI,'g');
+    // block rectangle to show the example length (4 bars)
+    const rect = document.createElementNS(svg.namespaceURI,'rect');
+    rect.setAttribute('x', 80 + (startBar-1)*barWidth + 6);
+    rect.setAttribute('y', cy - 18);
+    rect.setAttribute('width', barWidth*4 - 12);
+    rect.setAttribute('height', 36);
+    rect.setAttribute('rx',8);
+    rect.setAttribute('fill','rgba(50,205,50,0.08)');
+    rect.setAttribute('stroke','rgba(50,205,50,0.25)');
+    rect.setAttribute('stroke-width',1.2);
+    g.appendChild(rect);
+    // title text
+    const tx = document.createElementNS(svg.namespaceURI,'text');
+    tx.setAttribute('x',cx); tx.setAttribute('y',cy+6); tx.setAttribute('text-anchor','middle'); tx.setAttribute('fill','#bfe9c7'); tx.setAttribute('font-size','12');
+    tx.textContent = b.title;
+    g.appendChild(tx);
+    // store data on rectangle for tooltip
+    rect.dataset.title = b.title;
+    rect.dataset.progression = b.progression;
+    rect.dataset.energy = b.energy;
+    attachTooltipEvents(rect, ()=>`<strong>${b.title}</strong><br>${b.progression}<br>Energy: ${b.energy}<br>${b.notation || ''}`);
+    rect.addEventListener('click', e=> e.target.classList.toggle('active'));
+    svg.appendChild(g);
+  });
+}
+
+/* Playhead implementation */
+let isPlaying = false;
+let playheadLine, playInterval;
+function createPlayhead(){
+  if(playheadLine) playheadLine.remove();
+  playheadLine = document.createElementNS(svg.namespaceURI,'line');
+  playheadLine.setAttribute('x1',80); playheadLine.setAttribute('x2',80);
+  playheadLine.setAttribute('y1',10); playheadLine.setAttribute('y2',400);
+  playheadLine.setAttribute('class','playhead');
+  playheadLine.setAttribute('stroke', 'white');
+  svg.appendChild(playheadLine);
+}
+
+/* highlight nodes at current absolute subdivision index */
+function highlightAt(absIndex){
+  // clear previous temporary highlights (non-active)
+  document.querySelectorAll('.drumNode.temp-high, .chordNode.temp-high, .bassNode.temp-high').forEach(n=>n.classList.remove('temp-high','active'));
+  // drums
+  document.querySelectorAll('.drumNode').forEach(d=>{
+    const bar = parseInt(d.dataset.bar);
+    const sub = parseInt(d.dataset.sub);
+    const aIdx = (bar-1)*SUBDIV + sub;
+    if(aIdx === absIndex) {
+      d.classList.add('temp-high');
+      d.setAttribute('fill','#fff');
+      setTimeout(()=>{ if(!d.classList.contains('active')) d.setAttribute('fill',getComputedStyle(document.documentElement).getPropertyValue('--drum').trim()); }, 120);
+    }
+  });
+  // chords: highlight chords that begin on that bar (subIndex==0)
+  const currentBar = Math.floor(absIndex / SUBDIV)+1;
+  document.querySelectorAll('.chordNode').forEach(c=>{
+    const cbar = parseInt(c.dataset.bar||0);
+    if(cbar===currentBar){
+      c.classList.add('temp-high');
+      c.setAttribute('fill','#fff');
+      setTimeout(()=>{ if(!c.classList.contains('active')) c.setAttribute('fill',getComputedStyle(document.documentElement).getPropertyValue('--chord').trim()); }, 220);
+    }
+  });
+  // bass: highlight rectangles whose startBar matches currentBar region
+  document.querySelectorAll('rect').forEach(r=>{
+    if(r.dataset && r.dataset.title){
+      const left = parseFloat(r.getAttribute('x'));
+      const startBar = Math.round((left - 80)/barWidth)+1;
+      const endBar = startBar + 3;
+      if(currentBar >= startBar && currentBar <= endBar){
+        r.setAttribute('fill','rgba(50,205,50,0.18)');
+        setTimeout(()=> r.setAttribute('fill','rgba(50,205,50,0.08)'), 200);
+      }
+    }
+  });
+}
+
+/* Start playback visual-only */
+function play(){
+  if(isPlaying) return;
+  isPlaying = true;
+  const bpm = parseInt(document.getElementById('bpmInput').value);
+  // duration of one subdivision (16th note) in ms: 60000 / (bpm * 4)
+  const subMs = 60000 / (bpm * 4);
+  let absIndex = 0;
+  createPlayhead();
+  const totalSubs = BAR_COUNT * SUBDIV;
+  playInterval = setInterval(()=>{
+    // compute x pos
+    const currentBar = Math.floor(absIndex / SUBDIV);
+    const subInBar = absIndex % SUBDIV;
+    const x = 80 + currentBar*barWidth + (subInBar/SUBDIV)*barWidth;
+    playheadLine.setAttribute('x1', x); playheadLine.setAttribute('x2', x);
+    highlightAt(absIndex);
+    absIndex = (absIndex + 1) % totalSubs;
+  }, subMs);
+}
+
+/* Pause playback */
+function pause(){
+  if(!isPlaying) return;
+  isPlaying = false;
+  clearInterval(playInterval);
+}
+
+/* Reset */
+function reset(){
+  pause();
+  if(playheadLine) { playheadLine.setAttribute('x1',80); playheadLine.setAttribute('x2',80); }
+}
+
+/* Tooltip helper */
+const tooltip = document.getElementById('tooltip');
+function attachTooltipEvents(el, htmlProvider){
+  el.addEventListener('mouseenter', (e)=>{
+    tooltip.style.display = 'block';
+    tooltip.innerHTML = htmlProvider();
+  });
+  el.addEventListener('mousemove', (e)=>{
+    tooltip.style.left = (e.pageX + 12) + 'px';
+    tooltip.style.top = (e.pageY + 12) + 'px';
+  });
+  el.addEventListener('mouseleave', ()=>{ tooltip.style.display = 'none'; });
+}
+
+/* =============
+   Initialization flow
+   ============= */
+function renderAll(){
+  // compute BAR_COUNT dynamically: use max bar referenced in drumJson + a default 32
+  let maxBar = 32;
+  drumJson.grooves.forEach(g => (g.bars||[]).forEach(b => { if(b.barNumber && b.barNumber>maxBar) maxBar=b.barNumber; }));
+  BAR_COUNT = Math.max(maxBar, 32);
+  document.getElementById('barCount').textContent = BAR_COUNT;
+  setSvgSize();
+  drawGrid();
+  drawChords();
+  const drumNodes = buildDrumNodes();
+  drawDrums(drumNodes);
+  drawBass();
+  createPlayhead();
+}
+
+/* controls */
+document.getElementById('playBtn').addEventListener('click', ()=> play());
+document.getElementById('pauseBtn').addEventListener('click', ()=> pause());
+document.getElementById('resetBtn').addEventListener('click', ()=> reset());
+const bpmInput = document.getElementById('bpmInput');
+bpmInput.addEventListener('input', ()=> document.getElementById('bpmVal').textContent = bpmInput.value);
+const zoomInput = document.getElementById('zoom');
+zoomInput.addEventListener('input', (e)=>{
+  barWidth = parseInt(e.target.value);
+  document.getElementById('zoomVal').textContent = barWidth;
+  renderAll();
+});
+
+/* initial render */
+document.getElementById('bpmVal').textContent = bpmInput.value;
+document.getElementById('zoomVal').textContent = barWidth;
+renderAll();
+
+</script>
+</body>
+</html>
