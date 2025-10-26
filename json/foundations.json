@@ -1,0 +1,250 @@
+{
+  "musicalFoundations": {
+    "keys": {
+      "major": [
+        {
+          "name": "C Major",
+          "description": "Pure & Simple: neutral, innocent, straightforward, optimistic; perfect for clarity-focused work or learning new concepts.",
+          "sharpsFlats": 0,
+          "mood": ["clarity", "focus", "whitespace"]
+        },
+        {
+          "name": "G Major",
+          "description": "Bright & Pastoral: cheerful, outdoorsy, uplifting; ideal for creative brainstorming or collaborative work.",
+          "sharpsFlats": 1,
+          "mood": ["energy", "creativity", "positive momentum"]
+        },
+        {
+          "name": "D Major",
+          "description": "Triumphant & Celebratory: bold, victorious, inspiring; good for breakthrough moments and motivational energy.",
+          "sharpsFlats": 2,
+          "mood": ["motivation", "achievement", "forward momentum"]
+        },
+        {
+          "name": "A Major",
+          "description": "Confident & Radiant: warm, assured, glowing; balanced for sustained productivity sessions requiring focus and optimism.",
+          "sharpsFlats": 3,
+          "mood": ["focus", "optimism", "comfort"]
+        },
+        {
+          "name": "E Major",
+          "description": "Luminous & Exalted: bright, powerful, ethereal; good for inspiration, deep focus, or meditation-in-motion tasks.",
+          "sharpsFlats": 4,
+          "mood": ["inspiration", "transcendence", "deep focus"]
+        },
+        {
+          "name": "B Major",
+          "description": "Brilliant & Sharp: intense, crystalline, attention-demanding; ideal for analytical or detail-oriented work.",
+          "sharpsFlats": 5,
+          "mood": ["attention", "mental acuity", "energizing"]
+        },
+        {
+          "name": "F# Major",
+          "description": "Dreamy & Complex: ethereal, introspective, sophisticated; for nuanced creative work or complex problem-solving.",
+          "sharpsFlats": 6,
+          "mood": ["creativity", "complex thinking", "detached perspective"]
+        },
+        {
+          "name": "F Major",
+          "description": "Peaceful & Pastoral: gentle, grounded, harmonious; for sustained calm focus without drowsiness.",
+          "sharpsFlats": 1,
+          "mood": ["calm", "focus", "grounded"]
+        },
+        {
+          "name": "Bb Major",
+          "description": "Warm & Generous: rich, comforting; excellent for creative, communication, or collaborative tasks.",
+          "sharpsFlats": 2,
+          "mood": ["comfort", "collaboration", "emotional openness"]
+        },
+        {
+          "name": "Eb Major",
+          "description": "Majestic & Noble: grand, elevated, dignified; suitable for presentations, strategic planning, or work requiring gravitas.",
+          "sharpsFlats": 3,
+          "mood": ["importance", "gravitas", "strategic focus"]
+        },
+        {
+          "name": "Ab Major",
+          "description": "Lush & Introspective: deep, emotionally rich; ideal for reflective work or tasks needing emotional intelligence.",
+          "sharpsFlats": 4,
+          "mood": ["reflection", "emotional intelligence", "depth"]
+        },
+        {
+          "name": "Db Major",
+          "description": "Mysterious & Enveloping: dark-bright, immersive; good for deep concentration or complex creative work.",
+          "sharpsFlats": 5,
+          "mood": ["deep focus", "creative immersion", "otherworldly"]
+        }
+      ],
+      "minor": [
+        {
+          "name": "A Minor",
+          "description": "Natural & Unadorned: pure melancholy, introspective; perfect for neutral focus or analytical tasks.",
+          "relativeMajor": "C Major",
+          "mood": ["focus", "neutral emotion", "attention"]
+        },
+        {
+          "name": "E Minor",
+          "description": "Pensive & Contemplative: thoughtful, serious; excellent for problem-solving or deep concentration.",
+          "relativeMajor": "G Major",
+          "mood": ["deep work", "serious thinking", "contemplation"]
+        },
+        {
+          "name": "B Minor",
+          "description": "Lonely & Searching: isolated, emotionally complex; suited for persistent or solitary tasks.",
+          "relativeMajor": "D Major",
+          "mood": ["persistence", "emotional depth", "complexity"]
+        },
+        {
+          "name": "F# Minor",
+          "description": "Dark & Passionate: intense, brooding; ideal for emotionally authentic creative work.",
+          "relativeMajor": "A Major",
+          "mood": ["emotional intensity", "passion", "creative depth"]
+        },
+        {
+          "name": "C# Minor",
+          "description": "Tragic & Profound: heavy, dramatic; best for work requiring catharsis or creative processing.",
+          "relativeMajor": "E Major",
+          "mood": ["emotional processing", "intensity", "deep reflection"]
+        },
+        {
+          "name": "G# Minor",
+          "description": "Anguished & Intense: sharp, emotionally extreme; for pushing through discomfort or internal struggle.",
+          "relativeMajor": "B Major",
+          "mood": ["challenge", "resilience", "emotional extremity"]
+        },
+        {
+          "name": "D# Minor",
+          "description": "Rare & Otherworldly: alien, unsettling; useful for experimental or unconventional work.",
+          "relativeMajor": "F# Major",
+          "mood": ["innovation", "experimentation", "otherworldly"]
+        },
+        {
+          "name": "D Minor",
+          "description": "Serious & Determined: resolved melancholy; for disciplined, purposeful work.",
+          "relativeMajor": "F Major",
+          "mood": ["discipline", "focus", "emotional weight"]
+        },
+        {
+          "name": "G Minor",
+          "description": "Passionate & Restless: agitated, urgent; excellent for deadline-driven or tension-based work.",
+          "relativeMajor": "Bb Major",
+          "mood": ["passion", "tension", "urgency"]
+        },
+        {
+          "name": "C Minor",
+          "description": "Solemn & Heroic: dark but dignified; suitable for powering through challenges.",
+          "relativeMajor": "Eb Major",
+          "mood": ["determination", "heroic struggle", "endurance"]
+        },
+        {
+          "name": "F Minor",
+          "description": "Gloomy & Resigned: deep melancholy; for sustained work through unpleasant tasks.",
+          "relativeMajor": "Ab Major",
+          "mood": ["acceptance", "resilience", "focus"]
+        },
+        {
+          "name": "Bb Minor",
+          "description": "Dark & Mysterious: shadowy, enigmatic; for investigative or research-focused work.",
+          "relativeMajor": "Db Major",
+          "mood": ["investigation", "analysis", "enigma"]
+        },
+        {
+          "name": "Eb Minor",
+          "description": "Anxious & Oppressive: heavy, burdensome; use sparingly for truly challenging sessions.",
+          "relativeMajor": "Gb Major",
+          "mood": ["challenge", "overwhelm", "emotional load"]
+        },
+        {
+          "name": "Ab Minor",
+          "description": "Desolate & Remote: cold, distant; suitable for purely analytical work requiring emotional detachment.",
+          "relativeMajor": "Cb Major",
+          "mood": ["detachment", "analysis", "cold focus"]
+        }
+      ]
+    },
+    "tempos": [
+      {
+        "bpm": 70,
+        "description": "Slow & Contemplative: deep downtempo, ambient; for reading, creative writing, or meditation.",
+        "mood": ["focus", "calm", "deep work"]
+      },
+      {
+        "bpm": 80,
+        "description": "Relaxed & Steady: laid-back hip-hop or chillwave; ideal for routine tasks or brainstorming.",
+        "mood": ["relaxed", "steady", "routine"]
+      },
+      {
+        "bpm": 90,
+        "description": "Smooth & Groovy: classic hip-hop, reggae; sweet spot for steady productivity without urgency.",
+        "mood": ["steady energy", "workflow flow", "mid-tempo productivity"]
+      },
+      {
+        "bpm": 100,
+        "description": "Balanced & Comfortable: universal tempo for general productivity and soft pop/rock tasks.",
+        "mood": ["comfortable", "balanced", "general workflow"]
+      },
+      {
+        "bpm": 110,
+        "description": "Moderate Energy: uptempo pop, disco; suitable for consistent energy and engagement.",
+        "mood": ["moderate energy", "engagement", "iteration"]
+      },
+      {
+        "bpm": 120,
+        "description": "Standard Dance Tempo: driving energy, great for repetitive tasks or sustained motivation.",
+        "mood": ["energy", "drive", "motivation"]
+      },
+      {
+        "bpm": 130,
+        "description": "Upbeat & Energetic: clear forward momentum, for speed and accuracy tasks.",
+        "mood": ["speed", "energy", "focus"]
+      },
+      {
+        "bpm": 140,
+        "description": "High Energy & Driving: intense focus sessions or physical activity.",
+        "mood": ["high energy", "intensity", "driving"]
+      },
+      {
+        "bpm": 150,
+        "description": "Intense & Propulsive: aggressive pace for crunch-time deliverables.",
+        "mood": ["intense", "propulsion", "crunch work"]
+      },
+      {
+        "bpm": 160,
+        "description": "Aggressive & Fast: rapid iteration cycles or high-volume focus tasks.",
+        "mood": ["aggressive", "fast", "flow state"]
+      },
+      {
+        "bpm": 170,
+        "description": "Breakneck Pace: extreme tempo for mechanical tasks or physical training.",
+        "mood": ["extreme", "mechanical", "rapid-fire"]
+      },
+      {
+        "bpm": 180,
+        "description": "Maximum Velocity: almost percussive; best for ultra-short, high-intensity sessions.",
+        "mood": ["maximum intensity", "velocity", "challenge"]
+      }
+    ],
+    "implementationRecommendations": {
+      "filterByMood": ["focus", "energy", "flow", "intensity", "calm", "reflection"],
+      "majorKeyMapping": {
+        "focus": ["C Major", "F Major"],
+        "energy": ["G Major", "D Major", "A Major"],
+        "inspiration": ["E Major", "B Major", "F# Major"],
+        "comfort": ["Bb Major", "Eb Major", "Ab Major", "Db Major"]
+      },
+      "minorKeyMapping": {
+        "neutralFocus": ["A Minor", "E Minor"],
+        "deepWork": ["B Minor", "F# Minor", "D Minor"],
+        "intenseSessions": ["C# Minor", "G# Minor", "C Minor"],
+        "processingMode": ["G Minor", "F Minor", "Bb Minor", "Eb Minor", "Ab Minor"]
+      },
+      "tempoMoodMapping": [
+        {"rangeBPM": [70, 80], "mood": ["calm", "relaxed", "focus"]},
+        {"rangeBPM": [90, 100], "mood": ["steady", "comfortable", "workflow"]},
+        {"rangeBPM": [110, 130], "mood": ["moderate energy", "engagement", "productivity"]},
+        {"rangeBPM": [140, 150], "mood": ["high energy", "intense", "drive"]},
+        {"rangeBPM": [160, 180], "mood": ["extreme", "rapid", "maximum intensity"]}
+      ]
+    }
+  }
+}
