@@ -1,0 +1,234 @@
+{
+  "module": "Bass Rhythms",
+  "overview": {
+    "definition": "Bass rhythm is the foundation that bridges harmony (what chords are being played) and rhythm (when beats occur). The bass line serves multiple critical functions:\n1. Harmonic Foundation: Defines chord roots and provides low-end frequency content\n2. Rhythmic Drive: Creates groove and forward momentum through note placement and duration\n3. Melodic Movement: Connects chords through stepwise or intervallic motion\n4. Space Management: Determines when to play and when to rest, leaving room for other elements\n\nA great bass line is felt more than heard—it should be the gravitational force that makes people move without demanding conscious attention.",
+    "core_concepts": {
+      "note_duration_and_articulation": {
+        "whole_notes": {
+          "description": "Long, held notes that provide harmonic foundation without rhythmic complexity. Creates space and weight.",
+          "use_case": "Ballads, ambient music, when drums/percussion handle rhythm"
+        },
+        "half_notes": {
+          "description": "Medium sustain, often used to outline chord changes while maintaining simplicity.",
+          "use_case": "Mid-tempo grooves, walking between busy and minimal"
+        },
+        "quarter_notes": {
+          "description": "The fundamental rhythmic unit. Each beat gets one note—steady, driving, reliable.",
+          "use_case": "Rock, punk, straightforward pop, four-on-the-floor dance music"
+        },
+        "eighth_notes": {
+          "description": "Doubles the rhythmic activity. Creates busy, energetic grooves.",
+          "use_case": "Funk, disco, Latin, energetic pop, driving rock"
+        },
+        "sixteenth_notes": {
+          "description": "Ultra-fast, intricate rhythms. Often mixed with rests for syncopated patterns.",
+          "use_case": "Funk, R&B, technical genres, when bass is a lead element"
+        },
+        "articulation": {
+          "staccato": "Short, punchy notes with space between (funk, slap bass)",
+          "legato": "Smooth, connected notes (soul, R&B, melodic lines)"
+        }
+      },
+      "rhythmic_placement": {
+        "on_beat": "Notes that land on beats 1, 2, 3, 4. Provides stability and predictability.",
+        "off_beat": "Notes on the 'and' or other subdivisions. Creates syncopation and funk.",
+        "syncopation": "Emphasizing unexpected beats or subdivisions while omitting expected ones. The secret ingredient of groove."
+      },
+      "melodic_movement_patterns": {
+        "root_notes_only": "Bass plays only the root of each chord. Simple, solid, unobtrusive.",
+        "root_fifth": "Alternates between root and fifth of each chord. Adds motion without complexity.",
+        "walking_bass": "Stepwise motion connecting chord roots, typically in quarter notes. Jazz/blues standard.",
+        "pedal_tone": "Sustaining one note while chords change above. Creates tension and drone effect.",
+        "chromatic_approach": "Using half-step movement to approach target notes from above or below. Adds sophistication."
+      }
+    },
+    "construction_tutorial": [
+      "Identify Your Chord Progression",
+      "Determine Energy Level",
+      "Map Chord Changes",
+      "Fill the Space",
+      "Add Syncopation",
+      "Refine Articulation"
+    ]
+  },
+  "examples": [
+    {
+      "id": "bass_1",
+      "title": "The Foundation",
+      "progression": "C - G - Am - F",
+      "energy_level": "Minimal",
+      "genre": ["Ballad", "Ambient Pop"],
+      "notation": "Bar 1 (C Major): C-------------------- | Bar 2 (G Major): G-------------------- | Bar 3 (Am): A-------------------- | Bar 4 (F Major): F--------------------",
+      "analysis": "Absolute minimum bass line. Each chord root is held for the entire bar. Provides harmonic foundation without rhythmic contribution.",
+      "usage_tips": [
+        "Use with busy drum patterns or intricate guitar/keys",
+        "Great for building arrangements—start here, add complexity in chorus",
+        "Let other instruments define the rhythm completely",
+        "Consider adding subtle filter or envelope movement for interest"
+      ]
+    },
+    {
+      "id": "bass_2",
+      "title": "The Heartbeat",
+      "progression": "Am - G - F - G",
+      "energy_level": "Low-Medium",
+      "genre": ["Rock", "Alternative", "Punk", "Pop"],
+      "notation": "Bar 1 (Am): A A A A | Bar 2 (G Major): G G G G | Bar 3 (F Major): F F F F | Bar 4 (G Major): G G G G",
+      "analysis": "Four-on-the-floor root notes. Drives the rhythm home. Each note should be consistent in length.",
+      "usage_tips": [
+        "Keep note duration consistent—all staccato or all sustained",
+        "Lock with the kick drum pattern for maximum impact",
+        "Perfect for choruses or high-energy sections",
+        "Can be played with pick for attack or fingers for warmth"
+      ]
+    },
+    {
+      "id": "bass_3",
+      "title": "The Bounce",
+      "progression": "C - G - Am - F",
+      "energy_level": "Medium",
+      "genre": ["Pop-punk", "Country", "Upbeat Indie Rock"],
+      "notation": "Bar 1 (C Major): C g C g C g C g | Bar 2 (G Major): G d G d G d G d | Bar 3 (Am): A e A e A e A e | Bar 4 (F Major): F c F c F c F c",
+      "analysis": "Alternates root and fifth on every eighth note. Creates driving, bouncy energy. Fifth is played an octave above root for voice leading.",
+      "usage_tips": [
+        "Play with slight palm muting for tightness",
+        "Alternate finger plucking styles",
+        "Works perfectly with straight eighth note hi-hat patterns",
+        "Slight accent on beats 1 and 3 for extra groove"
+      ]
+    },
+    {
+      "id": "bass_4",
+      "title": "The Funk Foundation",
+      "progression": "Am - Am - Am - Am",
+      "energy_level": "High",
+      "genre": ["Funk", "R&B", "Dance", "Hip-hop"],
+      "notation": "Sixteenth note syncopation with ghost notes, e.g., A · · (a) · · A · · · A a · · e ·",
+      "analysis": "Heavily syncopated pattern built around omitted beats and ghost notes. Rhythm is the star.",
+      "usage_tips": [
+        "Slap bass technique is ideal",
+        "Ghost notes should be felt, not heard",
+        "Lock with kick drum and snare hits",
+        "Mute strings immediately after plucking for tightness",
+        "Practice slowly with a metronome before full speed"
+      ]
+    },
+    {
+      "id": "bass_5",
+      "title": "The Walking Line",
+      "progression": "Cmaj7 - Am7 - Dm7 - G7",
+      "energy_level": "Medium",
+      "genre": ["Jazz", "Swing", "Sophisticated Pop", "Neo-Soul"],
+      "notation": "Bar 1 (Cmaj7): C E G B | Bar 2 (Am7): A G F E | Bar 3 (Dm7): D F A C | Bar 4 (G7): G F E D",
+      "analysis": "Classic walking bass. Outlines chord tones and connects stepwise to next chord. Bar 2 walks down from A to E to set up D in bar 3.",
+      "usage_tips": [
+        "Swing eighth notes even if written as quarters",
+        "Slight emphasis on beats 1 and 3",
+        "Use chromatic passing tones for sophistication",
+        "Keep volume consistent",
+        "Upright bass or fingerstyle electric work"
+      ]
+    },
+    {
+      "id": "bass_6",
+      "title": "The Disco Drive",
+      "progression": "Am - F - C - G",
+      "energy_level": "Medium-High",
+      "genre": ["Disco", "Nu-Disco", "Dance-Pop", "House"],
+      "notation": "Alternating low/high octave root notes with rest on beat 2-+, e.g., A a A · A a A a",
+      "analysis": "Octave jumps add melodic interest. Strategic rest creates disco 'lift'.",
+      "usage_tips": [
+        "Play with consistent attack",
+        "Do not skip rest on beat 2-+",
+        "Lock with four-on-the-floor kick drum",
+        "Optional 16th note fills on beat 4 for variation",
+        "Subtle filter sweep or envelope adds movement"
+      ]
+    },
+    {
+      "id": "bass_7",
+      "title": "The Reggae One-Drop",
+      "progression": "C - Am - F - G",
+      "energy_level": "Medium",
+      "genre": ["Reggae", "Ska", "Dub"],
+      "notation": "Notes fall exclusively on '+' of beats, sustaining through downbeats, e.g., · C----+ · C----+ ·",
+      "analysis": "Characteristic 'lifted' reggae feel. Works with kick drum on beat 3 only.",
+      "usage_tips": [
+        "Let each note ring; avoid muting",
+        "Relaxed, laid-back timing",
+        "Round, warm tone with no aggressive attack",
+        "Lock with rimshot/snare on beat 3",
+        "Optional slides between notes for flavor"
+      ]
+    },
+    {
+      "id": "bass_8",
+      "title": "The Anticipation",
+      "progression": "C - G - Am - F",
+      "energy_level": "Medium-High",
+      "genre": ["Modern Pop", "EDM", "Hip-hop influenced Pop"],
+      "notation": "Anticipation of next root on 'a' of beat 4, e.g., C--------+ · · · · C--------+ · · G ·",
+      "analysis": "Creates forward momentum. Sustained notes create space; anticipation notes add rhythmic interest.",
+      "usage_tips": [
+        "Anticipation note slightly accented",
+        "Works with trap-influenced hi-hats",
+        "Optional pitch bends/slides",
+        "Ideal for verses needing movement",
+        "Precise timing is critical"
+      ]
+    },
+    {
+      "id": "bass_9",
+      "title": "The Pedal Tone Groove",
+      "progression": "Am - F - C - G (but bass stays on A)",
+      "energy_level": "Medium",
+      "genre": ["Rock", "Alternative", "Post-Rock", "Cinematic"],
+      "notation": "A pedal throughout: A==============A========A========· · · ·",
+      "analysis": "Bass holds constant note while chords move above. Rhythmic re-attacks prevent static feeling.",
+      "usage_tips": [
+        "Creates tension; sounds 'wrong' in an interesting way",
+        "Perfect for building sections or anticipation",
+        "Gradually increase re-attacks as section progresses",
+        "Works with distorted or heavily processed bass",
+        "Resolve to proper root notes in chorus for payoff"
+      ]
+    },
+    {
+      "id": "bass_10",
+      "title": "The Chromatic Climber",
+      "progression": "C - Em - F - G",
+      "energy_level": "Medium",
+      "genre": ["Jazz-influenced Pop", "Neo-Soul", "Sophisticated R&B"],
+      "notation": "C E G G# | A G F E | F G A B | C B A G",
+      "analysis": "Uses chromatic approach tones to connect chord roots smoothly. Adds sophistication without sounding wrong.",
+      "usage_tips": [
+        "Play with smooth legato articulation",
+        "Swing rhythm slightly for jazz feel",
+        "Chromatic approach notes like G# add sophistication",
+        "Ideal for sophisticated pop/R&B verses",
+        "Requires good fretboard knowledge"
+      ]
+    }
+  ],
+  "practice_framework": {
+    "skill_building_path": {
+      "weeks_1_2": "Practice Examples 1-2 (whole notes and quarter notes). Focus on timing, consistency, locking with metronome.",
+      "weeks_3_4": "Practice Examples 3,5 (eighth notes, walking bass). Focus on smooth transitions, note length control.",
+      "weeks_5_6": "Practice Examples 4,7,8 (funk, reggae, anticipations). Focus on rhythmic precision, ghost notes, off-beat emphasis.",
+      "weeks_7_8": "Practice Examples 6,9,10 (octave jumps, pedal tones, chromatic approaches). Focus on creative techniques, musical tension/release."
+    },
+    "application_exercise": [
+      "Choose a chord progression",
+      "Create 4 different bass lines using different examples as templates",
+      "Record each and listen back to evaluate which serves the song best",
+      "Combine elements from multiple examples to create your signature line"
+    ],
+    "listening_assignment": [
+      "Study bass lines in favorite songs",
+      "Identify notes being played (roots, walking, melodic)",
+      "Identify rhythm (quarter notes, syncopated, rests)",
+      "Analyze interaction with drums (locked, independent)",
+      "Observe articulation (staccato, legato)"
+    ]
+  }
+}
